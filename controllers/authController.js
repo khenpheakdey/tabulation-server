@@ -84,7 +84,7 @@ exports.signup = async (req, res) => {
               console.log('Email sent: ' + info.response);
             }
           });
-          res.send({ message: "Examiner was registered successfully!" });
+          return res.send({ message: "Examiner was registered successfully!" });
         });
       });
     }
@@ -123,7 +123,7 @@ exports.login = async (req, res) => {
       for (let i = 0; i < user.roles.length; i++) {
         authorities.push("ROLE_" + user.roles[i].name.toUpperCase());
       }
-      res.cookie("jwt", token,{
+      return res.cookie("jwt", token,{
         httpOnly: true,
         maxAge: 24 * 60 * 60 * 1000,
       }).status(200).json({
