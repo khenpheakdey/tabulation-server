@@ -18,6 +18,7 @@ var transporter = nodemailer.createTransport({
 });
 
 
+
 exports.signup = async (req, res) => {
   const user = new User({
     username: req.body.username,
@@ -26,10 +27,10 @@ exports.signup = async (req, res) => {
   });
 
   var mailOptions = {
-    from: 'pkhen@paragoniu.edu.kh',
+    from: process.env.GMAIL_USERNAME,
     to: req.body.email,
     subject: 'Tabulation System: Invitation',
-    text: `Username: ${req.body.username}, Password: ${req.body.password}`
+    text: `username: ${req.body.username}, password: ${req.body.password}`
   };
 
   user.save((err, user) => {
