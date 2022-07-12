@@ -9,13 +9,6 @@ const RefreshToken = db.refreshToken;
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 
-var transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: 'pkhen@paragoniu.edu.kh',
-    pass: 'rnD9V8xdad@$168'
-  }
-});
 
 
 exports.signup = async (req, res) => {
@@ -25,12 +18,7 @@ exports.signup = async (req, res) => {
     password: bcrypt.hashSync(req.body.password, 8)
   });
 
-  var mailOptions = {
-    from: 'pkhen@paragoniu.edu.kh',
-    to: req.body.email,
-    subject: 'Tabulation System: Invitation',
-    text: `Username: ${req.body.username}, Password: ${req.body.password}`
-  };
+
 
   user.save((err, user) => {
     if (err) {
@@ -53,13 +41,7 @@ exports.signup = async (req, res) => {
               res.status(500).send({ message: err });
               return;
             }
-            transporter.sendMail(mailOptions, function(error, info){
-              if (error) {
-                console.log(error);
-              } else {
-                console.log('Email sent: ' + info.response);
-              }
-            });
+       
             res.send({ message: "User was registered successfully!" });
           });
         }
@@ -76,13 +58,7 @@ exports.signup = async (req, res) => {
             res.status(500).send({ message: err });
             return;
           }
-          transporter.sendMail(mailOptions, function(error, info){
-            if (error) {
-              console.log(error);
-            } else {
-              console.log('Email sent: ' + info.response);
-            }
-          });
+         
           res.send({ message: "Examiner was registered successfully!" });
         });
       });
