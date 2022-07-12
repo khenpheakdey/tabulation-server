@@ -16,6 +16,7 @@ const catchError = (err, res) => {
 
 verifyToken = (req, res, next) => {
   let token =  req.cookies['jwt'] || req.get("Authorization").split(" ")[1] || req.headers["x-access-token"];
+  console.log(token);
   if (!token) {
     return res.status(403).send({ message: "No token provided!" });
   }
