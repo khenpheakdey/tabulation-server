@@ -6,7 +6,7 @@ const Criteria = mongoose.model(
     description: String,
     levels: {
       type: String,
-      enum:[ "Excellent" , "Very good","Satisfactory","Unsatisfactory" ]
+      enum:["Excellent" , "Very good","Satisfactory","Unsatisfactory", "Meets Expectations","Exceeds Expectations","Meets Expectations sometimes","Does not meet expectations"]
     },
     minScore: Number,
     maxScore: Number,

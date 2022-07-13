@@ -3,7 +3,7 @@ const db = require("../../models");
 const Role = db.role;
 
 const database = mongoose.connect(
-  process.env.MONGODB_URL,
+  "mongodb+srv://pheakdeykhen:nagxIn-vuwmoz-2mytcy@etabulation.rylouqi.mongodb.net/?retryWrites=true&w=majority",
   { useNewUrlParser: true, 
     useUnifiedTopology: true, 
   }

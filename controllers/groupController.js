@@ -15,7 +15,6 @@ exports.createGroup = async (req,res,next)=>{
                 res.status(500).send({message: err});
                 return;
             }
-
             if(req.body.candidates){
                 Candidate.find({
                     _id: {$in: req.body.candidates}
@@ -82,5 +81,32 @@ exports.getByEvent = async (req,res,next)=>{
             return;
         }
         return res.status(200).send(docs);
+    });
+}
+
+exports.get = async (req,res,next)=>{
+    await Group.find().populate("events candidates")
+    .exec((err,groups)=>{
+        if(err){
+            res.status(500).send({message: err});
+            return;
+        }
+
+        return res.status(200).send(groups);
+    })
+}
+
+exports.delete = async (req,res,next) => {
+    const id = req.query['id'];
+    console.log(id);
+
+    Group.findOneAndDelete({_id: id})
+    .then(data => {
+        return res.send({message:"Group succesfully deleted!", data: data});
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error deleting Group with id=" + id
+      });
     });
 }

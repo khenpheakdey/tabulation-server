@@ -89,3 +89,24 @@ exports.getScore = async (req,res,next)=>{
     }
 }
 
+exports.getLatest = async (req,res,next)=>{
+    const {id} = req.query;
+    await GroupScore
+        .aggregate([{
+            $match: {group: id}
+        },
+        {
+            $sort: {_id: -1}
+        },{
+            $limit: 3
+        }]).exec(
+        (err, docs) => {
+            if (err){
+                res.status(500).send({message: err});
+                return;
+            }
+            return res.status(200).send(docs);
+        });
+
+}
+

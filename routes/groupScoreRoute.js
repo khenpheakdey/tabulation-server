@@ -14,6 +14,11 @@ router.get("/getScore",
     groupScoreController.getScore
 );
 
+router.get("/getLatest", 
+    authJwt.verifyToken,
+    groupScoreController.getLatest
+);
+
 router.post("/createScores", authJwt.verifyToken,groupScoreController.createScores);
 
 

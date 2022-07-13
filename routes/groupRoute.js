@@ -8,6 +8,9 @@ router.post("/create",
     groupController.createGroup
 );
 
+router.get("/get",authJwt.verifyToken, groupController.get);
+router.delete("/delete", authJwt.verifyToken, groupController.delete);
+
 router.get("/getByEvent",
     authJwt.verifyToken,
     groupController.getByEvent
